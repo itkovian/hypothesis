@@ -70,7 +70,7 @@ PACKAGE = {
         "Programming Language :: Python :: Implementation :: PyPy",
         "Topic :: Software Development :: Testing",
     ],
-    'long_description': open(README).read(),
+    'long_description': "",
     'tests_require': [
         'pytest', 'pytest-rerunfailures', 'pytest-faulthandler', 'flake8'],
     'cmdclass': {'test': PyTest},
