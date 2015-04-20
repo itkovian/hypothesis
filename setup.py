@@ -10,12 +10,20 @@
 
 # END HEADER
 
-from distutils.core import setup
 from setuptools.command.test import test as TestCommand
 from setuptools import find_packages
 import sys
 import os
 
+import vsc.install.shared_setup as shared_setup
+
+V = '1.2.1'
+
+shared_setup.SHARED_TARGET.update({
+    'url': 'https://pypi.python.org/pypi/hypothesis',
+    'download_url': ('https://pypi.python.org/packages/source/h/hypothesis/'
+                     'hypothesis-%s.tar.gz#md5=5070d89fc001a1055133eb8f75b75080' % (V,))
+})
 
 def local_file(name):
     return os.path.join(os.path.dirname(__file__), name)
@@ -35,18 +43,18 @@ class PyTest(TestCommand):
         errno = pytest.main(self.test_args)
         sys.exit(errno)
 
-setup(
-    name='hypothesis',
-    version='1.2.1',
-    author='David R. MacIver',
-    author_email='david@drmaciver.com',
-    packages=find_packages(SOURCE),
-    package_dir={"": SOURCE},
-    url='https://github.com/DRMacIver/hypothesis',
-    license='MPL v2',
-    description='A library for property based testing',
-    zip_safe=False,
-    classifiers=[
+PACKAGE = {
+    'name': 'hypothesis',
+    'version': V,
+    'author': 'David R. MacIver',
+    'author_email': 'david@drmaciver.com',
+    'packages': find_packages(SOURCE),
+    'package_dir': {"": SOURCE},
+    'url': 'https://github.com/DRMacIver/hypothesis',
+    'license': 'MPL v2',
+    'description': 'A library for property based testing',
+    'zip_safe': False,
+    'classifiers': [
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
@@ -62,8 +70,13 @@ setup(
         "Programming Language :: Python :: Implementation :: PyPy",
         "Topic :: Software Development :: Testing",
     ],
-    long_description=open(README).read(),
-    tests_require=[
+    'long_description': open(README).read(),
+    'tests_require': [
         'pytest', 'pytest-rerunfailures', 'pytest-faulthandler', 'flake8'],
-    cmdclass={'test': PyTest},
-)
+    'cmdclass': {'test': PyTest},
+}
+
+PACKAGE['provides'] =  ['python-hypothesis = %s' % (V,)]
+
+if __name__ == '__main__':
+    shared_setup.action_target(PACKAGE)
