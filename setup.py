@@ -44,7 +44,7 @@ class PyTest(TestCommand):
         sys.exit(errno)
 
 PACKAGE = {
-    'name': 'hypothesis',
+    'name': 'python-hypothesis',
     'version': V,
     'author': ['David R. MacIver'],
     'author_email': 'david@drmaciver.com',
