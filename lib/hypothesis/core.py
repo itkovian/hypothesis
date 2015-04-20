@@ -381,7 +381,7 @@ def given(*generator_arguments, **generator_kwargs):
 
             given_specifier = (
                 tuple(map(convert_to_specifier, arguments)),
-                {k: convert_to_specifier(v) for k, v in kwargs.items()}
+                dict([(k, convert_to_specifier(v)) for (k, v) in kwargs.items()])
             )
 
             search_strategy = strategy(given_specifier, settings)
