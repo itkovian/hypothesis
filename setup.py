@@ -46,7 +46,7 @@ class PyTest(TestCommand):
 PACKAGE = {
     'name': 'hypothesis',
     'version': V,
-    'author': 'David R. MacIver',
+    'author': ['David R. MacIver'],
     'author_email': 'david@drmaciver.com',
     'packages': find_packages(SOURCE),
     'package_dir': {"": SOURCE},
